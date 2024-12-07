@@ -3,6 +3,8 @@ package com.todoTask.crud.repaso.entities;
 import com.todoTask.crud.repaso.tools.enums.RoleUser;
 import jakarta.persistence.*;
 
+import javax.print.Doc;
+
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -24,5 +26,11 @@ public class UserEntity {
     private RoleUser role;
 
     private Boolean active;
+
+    @OneToOne(mappedBy = "user")
+    private PatientEntity patient;
+
+    @OneToOne(mappedBy = "user")
+    private DoctorEntity doctor;
 
 }

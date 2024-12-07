@@ -22,4 +22,12 @@ public class DateEntity {
     private DateStatus status;
 
     private String notes;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id", nullable = false)
+    private PatientEntity patient;
+
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", nullable = false)
+    private DoctorEntity doctor;
 }

@@ -2,6 +2,8 @@ package com.todoTask.crud.repaso.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "specialities")
 public class SpecialtyEntity {
@@ -12,5 +14,8 @@ public class SpecialtyEntity {
     @Column(unique = true, nullable = false)
     private String name;
 
-    private String descriptions;
+    private String description;
+
+    @OneToMany(mappedBy = "specialty")
+    private List<DoctorEntity> doctors;
 }

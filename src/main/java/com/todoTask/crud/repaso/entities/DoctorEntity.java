@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "patients")
-public class PatientEntity {
+@Table(name = "doctors")
+public class DoctorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,14 +17,17 @@ public class PatientEntity {
     @Column(nullable = false)
     private String lastname;
 
-    @Column(unique = true)
-    private String document;
-
     @OneToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "patient")
+    @ManyToOne
+    @JoinColumn(name = "speciality_id")
+    private SpecialtyEntity specialty;
+
+    @OneToMany(mappedBy = "doctor")
     private List<DateEntity> dates;
 
+    @OneToMany(mappedBy = "doctor")
+    private List<ShiftEntity> shifts;
 }

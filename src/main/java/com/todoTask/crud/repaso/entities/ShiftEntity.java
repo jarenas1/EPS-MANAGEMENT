@@ -20,4 +20,8 @@ public class ShiftEntity {
     private LocalTime endTime;
 
     private Boolean active = true;
+
+    @ManyToOne
+    @JoinColumn(name = "doctor_id", nullable = false)
+    private DoctorEntity doctor;
 }
