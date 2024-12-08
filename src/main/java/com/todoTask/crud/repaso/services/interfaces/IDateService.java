@@ -16,8 +16,10 @@ public interface IDateService {
     List<DateEntity> findByPatientAndStatus(Long PatientId, DateStatus status);
     List<DateEntity> findByDoctorAndStatus(Long doctorId, DateStatus status);
     ResponseEntity<DateEntity> save(DateEntity dateEntity);
+    ResponseEntity<DateEntity>putDateAsDone(Long dateId);
     ResponseEntity<DateEntity> update(DateEntity dateEntity);
     Page<DateEntity> findAll(Pageable pageable);
     Boolean delete(Long id);
+    ResponseEntity<DateEntity> rescheduleDate(Long id, LocalDateTime newDate);
 
 }
