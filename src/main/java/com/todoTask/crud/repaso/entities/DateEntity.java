@@ -30,4 +30,6 @@ public class DateEntity {
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
     private DoctorEntity doctor;
+
+
 }
