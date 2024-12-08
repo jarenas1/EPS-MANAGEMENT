@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface IDateService {
-    List<DateEntity> findByDoctorAndDateTimeBetween(DoctorEntity doctor, LocalDateTime start, LocalDateTime end);
-    List<DateEntity> findByPatientAndStatus(PatientEntity patient, DateStatus status);
-    List<DateEntity> findByDoctorAndStatus(DoctorEntity doctor, DateStatus status);
+    List<DateEntity> findByDoctorAndDateTimeBetween(Long doctorId, LocalDateTime start, LocalDateTime end);
+    List<DateEntity> findByPatientAndStatus(Long PatientId, DateStatus status);
+    List<DateEntity> findByDoctorAndStatus(Long doctorId, DateStatus status);
     ResponseEntity<DateEntity> save(DateEntity dateEntity);
     ResponseEntity<DateEntity> update(DateEntity dateEntity);
     Page<DateEntity> findAll(Pageable pageable);

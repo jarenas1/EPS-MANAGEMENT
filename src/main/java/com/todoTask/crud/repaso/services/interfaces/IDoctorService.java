@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface IDoctorService {
-    List<DoctorEntity> findByEspecialidad(SpecialtyEntity specialty);
+    List<DoctorEntity> findBySpeciality(SpecialtyEntity specialty);
     ResponseEntity<DoctorEntity> save(DoctorEntity doctorEntity);
     ResponseEntity<DoctorEntity> update(DoctorEntity doctorEntity);
     Page<DoctorEntity> findAll(Pageable pageable);

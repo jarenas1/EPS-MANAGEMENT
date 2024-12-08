@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface DoctorRepository  extends JpaRepository<DoctorEntity, Long> {
-    List<DoctorEntity> findByEspecialidad(SpecialtyEntity specialty);
+    List<DoctorEntity> findBySpeciality(SpecialtyEntity specialty);
 }
