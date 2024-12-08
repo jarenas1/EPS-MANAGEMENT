@@ -4,7 +4,9 @@ import com.todoTask.crud.repaso.entities.SpecialtyEntity;
 import com.todoTask.crud.repaso.repositories.SpecialityRepository;
 import com.todoTask.crud.repaso.services.interfaces.ISpecialityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,28 +16,44 @@ public class SpecialityServiceImp implements ISpecialityService {
     @Autowired
     SpecialityRepository specialityRepository;
 
+    @Transactional
     @Override
     public List<SpecialtyEntity> findAll() {
         return specialityRepository.findAll();
     }
 
+    @Transactional
     @Override
     public Optional<SpecialtyEntity> findByName(String name) {
         return specialityRepository.findByName(name);
     }
 
+    @Transactional
     @Override
     public ResponseEntity<SpecialtyEntity> save(SpecialtyEntity specialty) {
-        return null;
+        SpecialtyEntity specialtyEntitySaved = specialityRepository.save(specialty);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(specialtyEntitySaved);
     }
 
+    @Transactional
     @Override
     public Boolean delete(Long id) {
-        return null;
+        Optional<SpecialtyEntity> optionalSpecialty = specialityRepository.findById(id);
+
+        if(optionalSpecialty.isEmpty()){
+            return false;
+        }else{
+            specialityRepository.delete(optionalSpecialty.get());
+            return true;
+        }
     }
 
+    @Transactional
     @Override
-    public Optional<SpecialtyEntity> update(SpecialtyEntity specialty) {
-        return Optional.empty();
+    public ResponseEntity<SpecialtyEntity> update(SpecialtyEntity specialty) {
+        SpecialtyEntity specialtyUpdated = specialityRepository.save(specialty);
+        return ResponseEntity.status(HttpStatus.OK).body(specialtyUpdated);
     }
 }

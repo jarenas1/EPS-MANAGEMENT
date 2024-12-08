@@ -11,5 +11,5 @@ public interface ISpecialityService {
     Optional<SpecialtyEntity> findByName(String name);
     ResponseEntity<SpecialtyEntity> save(SpecialtyEntity specialty);
     Boolean delete(Long id);
-    Optional<SpecialtyEntity> update(SpecialtyEntity specialty);
+    ResponseEntity<SpecialtyEntity> update(SpecialtyEntity specialty);
 }
