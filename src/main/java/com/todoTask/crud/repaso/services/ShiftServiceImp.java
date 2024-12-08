@@ -2,12 +2,14 @@ package com.todoTask.crud.repaso.services;
 
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.ShiftEntity;
+import com.todoTask.crud.repaso.error_handler.ShiftNotFoundException;
 import com.todoTask.crud.repaso.repositories.ShiftRepository;
 import com.todoTask.crud.repaso.services.interfaces.IShiftService;
 import com.todoTask.crud.repaso.tools.enums.Day;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,24 +38,30 @@ public class ShiftServiceImp implements IShiftService {
     }
 
     @Override
-    public Optional<ShiftEntity> findById(Long id) {
-        Optional<ShiftEntity>optionalShift = shiftRepository.findById(id);
-        ShiftEntity shiftEntity = optionalShift.orElseThrow();
-        return Optional.empty();
+    public ShiftEntity findById(Long id) {
+        Optional<ShiftEntity> optionalShift = shiftRepository.findById(id);
+        return optionalShift.orElseThrow(() -> new ShiftNotFoundException(String.format("We can't find a shift with the id %s", id)));
     }
 
     @Override
     public ResponseEntity<ShiftEntity> save(ShiftEntity shiftEntity) {
-        return null;
+        ShiftEntity shiftEntitySaved = shiftRepository.save(shiftEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(shiftEntity);
     }
 
     @Override
     public ResponseEntity<ShiftEntity> update(ShiftEntity shiftEntity) {
-        return null;
+        ShiftEntity shiftEntityUpdated = shiftRepository.save(shiftEntity);
+        return ResponseEntity.status(HttpStatus.OK).body(shiftEntityUpdated);
     }
 
     @Override
-    public Optional<ShiftEntity> delete(Long id) {
-        return Optional.empty();
+    public ShiftEntity delete(Long id) {
+        return shiftRepository.findById(id)
+            .map(shift -> {
+                shiftRepository.delete(shift);
+                return shift;
+            })
+            .orElseThrow(() -> new ShiftNotFoundException(String.format("We can't find a shift with the id %s", id)));
     }
 }

@@ -15,10 +15,10 @@ public interface IShiftService {
     List<ShiftEntity> findByDoctorAndDayAndActive(DoctorEntity doctor, Day day, Boolean active);
     List<ShiftEntity> findByDoctorAndActive(DoctorEntity doctor, Boolean active);
     Page<ShiftEntity> findAll(Pageable pageable);
-    Optional<ShiftEntity> findById(Long id);
+    ShiftEntity findById(Long id);
     ResponseEntity<ShiftEntity> save(ShiftEntity shiftEntity);
     ResponseEntity <ShiftEntity> update(ShiftEntity shiftEntity);
-    Optional<ShiftEntity> delete(Long id);
+    ShiftEntity delete(Long id);
 
 
 }
