@@ -2,9 +2,15 @@ package com.todoTask.crud.repaso.entities;
 
 import com.todoTask.crud.repaso.tools.enums.DateStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "dates")
 public class DateEntity {

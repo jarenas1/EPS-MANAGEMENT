@@ -2,9 +2,15 @@ package com.todoTask.crud.repaso.entities;
 
 import com.todoTask.crud.repaso.tools.enums.RoleUser;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.print.Doc;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class UserEntity {
