@@ -5,7 +5,9 @@ import com.todoTask.crud.repaso.entities.PatientEntity;
 import com.todoTask.crud.repaso.entities.SpecialtyEntity;
 import com.todoTask.crud.repaso.error_handler.DoctorNotFoundException;
 import com.todoTask.crud.repaso.error_handler.PatientNotFoundException;
+import com.todoTask.crud.repaso.error_handler.SpecialityNotFoundException;
 import com.todoTask.crud.repaso.repositories.DoctorRepository;
+import com.todoTask.crud.repaso.repositories.SpecialityRepository;
 import com.todoTask.crud.repaso.services.interfaces.IDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,10 +26,18 @@ public class DoctorServiceImp implements IDoctorService {
     @Autowired
     DoctorRepository doctorRepository;
 
+    @Autowired
+    SpecialityRepository specialityRepository;
+
     @Transactional(readOnly = true)
     @Override
-    public List<DoctorEntity> findBySpeciality(SpecialtyEntity specialty) {
-        return doctorRepository.findBySpeciality(specialty);
+    public ResponseEntity<?> findBySpeciality(Long idSpecialty) {
+
+        List<DoctorEntity> doctorEntities = doctorRepository.findBySpeciality(
+                specialityRepository.findById(idSpecialty).orElseThrow(
+                        ()-> new SpecialityNotFoundException("we cant found the speciality")));
+
+        return ResponseEntity.ok(doctorEntities);
     }
 
     @Transactional
