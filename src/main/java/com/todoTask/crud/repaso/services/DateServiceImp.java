@@ -87,16 +87,6 @@ public class DateServiceImp implements IDateService {
         return ResponseEntity.ok(date);
     }
 
-//    @Transactional
-//    @Override
-//    public ResponseEntity<DateEntity> save(DateEntity dateEntity) {
-//        checkIfDoctorIsAvalible(dateEntity);
-//        validateConflictsDates(dateEntity);
-//        dateEntity.setStatus(DateStatus.SCHEDULED);
-//        DateEntity dateEntityCreated = dateRepository.save(dateEntity);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(dateEntityCreated);
-//    }
-
     @Transactional
     @Override
     public ResponseEntity<DateEntity> save(DateWOStatus dateWOStatust) {
@@ -143,11 +133,11 @@ public class DateServiceImp implements IDateService {
     }
 
     @Transactional
-    public DateEntity cancelDate(Long dateId) {
+    public ResponseEntity<DateEntity> cancelDate(Long dateId) {
         DateEntity dateEntity = dateRepository.findById(dateId)
                 .orElseThrow(() -> new DateNotFoundException("Twe cant found the date"));
         dateEntity.setStatus(DateStatus.CANCELED);
-        return dateRepository.save(dateEntity);
+        return ResponseEntity.ok(dateRepository.save(dateEntity));
     }
 
     @Override
