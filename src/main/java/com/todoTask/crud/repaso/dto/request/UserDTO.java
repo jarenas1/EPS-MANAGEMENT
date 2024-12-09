@@ -30,9 +30,9 @@ public class UserDTO {
 
     private Boolean active = true;
 
-    private Boolean isAdmin;
+    private Boolean isAdmin = false;
 
-    private Boolean isDoctor;
+    private Boolean isDoctor = false;
 
     private Set<RoleUser> roles = new HashSet<>();
 

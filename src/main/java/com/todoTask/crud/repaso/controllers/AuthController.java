@@ -75,7 +75,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/register")
     public ResponseEntity<?> registrar(@RequestBody RegistroRequest registroRequest) {
         try {
             // Mapear request a entidad Usuario

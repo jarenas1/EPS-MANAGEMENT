@@ -29,15 +29,23 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> authorize
                         // Endpoints públicos
-                        .requestMatchers("/api/auth/**").permitAll()
+//                        .requestMatchers("/auth/**").permitAll()
+                          .requestMatchers("/**").permitAll()
+                                .requestMatchers( "/v3/api-docs/**",      // Para OpenAPI 3.0
+                                        "/swagger-ui/**",       // Swagger UI
+                                        "/swagger-ui.html",     // Página principal de Swagger UI
+                                        "/swagger-resources/**",
+                                        "/webjars/**")
+                                .permitAll()
+
 
                         // Endpoints protegidos por roles
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/medico/**").hasAnyRole("MEDICO", "ADMIN")
-                        .requestMatchers("/api/paciente/**").hasAnyRole("PACIENTE", "ADMIN")
+//                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+//                        .requestMatchers("/api/medico/**").hasAnyRole("MEDICO", "ADMIN")
+//                        .requestMatchers("/api/paciente/**").hasAnyRole("PACIENTE", "ADMIN")
 
                         // Cualquier otro endpoint requiere autenticación
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
