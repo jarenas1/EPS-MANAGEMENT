@@ -36,4 +36,60 @@ public class DoctorEntity {
 
     @OneToMany(mappedBy = "doctor")
     private List<ShiftEntity> shifts;
+
+    public List<DateEntity> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<DateEntity> dates) {
+        this.dates = dates;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<ShiftEntity> getShifts() {
+        return shifts;
+    }
+
+    public void setShifts(List<ShiftEntity> shifts) {
+        this.shifts = shifts;
+    }
+
+    public SpecialtyEntity getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(SpecialtyEntity specialty) {
+        this.specialty = specialty;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 }

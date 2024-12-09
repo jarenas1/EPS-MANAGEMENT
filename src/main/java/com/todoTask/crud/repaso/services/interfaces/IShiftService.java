@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface IShiftService {
 
-    List<ShiftEntity> findByDoctorAndDayAndActive(DoctorEntity doctor, Day day, Boolean active);
+    List<ShiftEntity> findByDoctorAndDayAndActive(Long idDoctor, Day day, Boolean active);
     List<ShiftEntity> findByDoctorAndActive(DoctorEntity doctor, Boolean active);
     Page<ShiftEntity> findAll(Pageable pageable);
     ShiftEntity findById(Long id);

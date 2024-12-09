@@ -2,7 +2,9 @@ package com.todoTask.crud.repaso.services;
 
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.ShiftEntity;
+import com.todoTask.crud.repaso.error_handler.DoctorNotFoundException;
 import com.todoTask.crud.repaso.error_handler.ShiftNotFoundException;
+import com.todoTask.crud.repaso.repositories.DoctorRepository;
 import com.todoTask.crud.repaso.repositories.ShiftRepository;
 import com.todoTask.crud.repaso.services.interfaces.IShiftService;
 import com.todoTask.crud.repaso.tools.enums.Day;
@@ -23,10 +25,14 @@ public class ShiftServiceImp implements IShiftService {
     @Autowired
     ShiftRepository shiftRepository;
 
+    @Autowired
+    DoctorRepository doctorRepository;
+
     @Transactional
     @Override
-    public List<ShiftEntity> findByDoctorAndDayAndActive(DoctorEntity doctor, Day day, Boolean active) {
-        return shiftRepository.findByDoctorAndDayAndActive(doctor,day,active);
+    public List<ShiftEntity> findByDoctorAndDayAndActive(Long idDoctor, Day day, Boolean active) {
+        DoctorEntity doctorEntity = doctorRepository.findById(idDoctor).orElseThrow(()-> new DoctorNotFoundException("we cant found the doctor"));
+        return shiftRepository.findByDoctorAndDayAndActive(doctorEntity,day,active);
     }
 
     @Override
