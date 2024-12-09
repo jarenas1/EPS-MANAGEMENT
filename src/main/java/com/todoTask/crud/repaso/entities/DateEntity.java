@@ -48,6 +48,16 @@ public class DateEntity {
         this.status = status;
     }
 
+    public DateEntity(LocalDateTime dateTime, DoctorEntity doctor, Integer duration, String notes, PatientEntity patient, String reason) {
+        this.dateTime = dateTime;
+        this.doctor = doctor;
+        this.duration = duration;
+        this.notes = notes;
+        this.patient = patient;
+        this.reason = reason;
+    }
+
+
     public DateEntity() {
     }
 

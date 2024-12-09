@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.services;
 
+import com.todoTask.crud.repaso.dto.request.DateWOStatus;
 import com.todoTask.crud.repaso.entities.DateEntity;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.PatientEntity;
@@ -86,9 +87,20 @@ public class DateServiceImp implements IDateService {
         return ResponseEntity.ok(date);
     }
 
+//    @Transactional
+//    @Override
+//    public ResponseEntity<DateEntity> save(DateEntity dateEntity) {
+//        checkIfDoctorIsAvalible(dateEntity);
+//        validateConflictsDates(dateEntity);
+//        dateEntity.setStatus(DateStatus.SCHEDULED);
+//        DateEntity dateEntityCreated = dateRepository.save(dateEntity);
+//        return ResponseEntity.status(HttpStatus.CREATED).body(dateEntityCreated);
+//    }
+
     @Transactional
     @Override
-    public ResponseEntity<DateEntity> save(DateEntity dateEntity) {
+    public ResponseEntity<DateEntity> save(DateWOStatus dateWOStatust) {
+        DateEntity dateEntity = new DateEntity(dateWOStatust.getDateTime(),dateWOStatust.getDoctor(), 30, dateWOStatust.getNotes(), dateWOStatust.getPatient(), dateWOStatust.getReason());
         checkIfDoctorIsAvalible(dateEntity);
         validateConflictsDates(dateEntity);
         dateEntity.setStatus(DateStatus.SCHEDULED);
