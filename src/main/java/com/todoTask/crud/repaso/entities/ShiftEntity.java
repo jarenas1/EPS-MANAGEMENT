@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.todoTask.crud.repaso.tools.enums.Day;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class ShiftEntity {
     private Boolean active = true;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
+    @JoinColumn(name = "doctor_id")
     private DoctorEntity doctor;
 
     public Boolean getActive() {

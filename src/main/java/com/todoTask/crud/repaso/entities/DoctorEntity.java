@@ -28,7 +28,7 @@ public class DoctorEntity {
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "speciality_id")
+    @JoinColumn(name = "specialty_id")
     private SpecialtyEntity specialty;
 
     @OneToMany(mappedBy = "doctor")

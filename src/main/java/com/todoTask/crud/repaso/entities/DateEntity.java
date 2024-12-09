@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Entity
 @Table(name = "dates")
 public class DateEntity {
@@ -37,16 +35,6 @@ public class DateEntity {
     @JoinColumn(name = "doctor_id", nullable = false)
     private DoctorEntity doctor;
 
-    public DateEntity(LocalDateTime dateTime, DoctorEntity doctor, Integer duration, Long id, String notes, PatientEntity patient, String reason, DateStatus status) {
-        this.dateTime = dateTime;
-        this.doctor = doctor;
-        this.duration = duration;
-        this.id = id;
-        this.notes = notes;
-        this.patient = patient;
-        this.reason = reason;
-        this.status = status;
-    }
 
     public DateEntity(LocalDateTime dateTime, DoctorEntity doctor, Integer duration, String notes, PatientEntity patient, String reason) {
         this.dateTime = dateTime;

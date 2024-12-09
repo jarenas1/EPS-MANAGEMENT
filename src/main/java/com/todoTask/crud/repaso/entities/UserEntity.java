@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.todoTask.crud.repaso.tools.enums.RoleUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ public class UserEntity {
     private PatientEntity patient;
 
     @OneToOne(mappedBy = "user")
+    @JsonIgnore
     private DoctorEntity doctor;
 
 }

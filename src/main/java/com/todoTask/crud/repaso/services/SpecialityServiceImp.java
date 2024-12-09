@@ -27,6 +27,7 @@ public class SpecialityServiceImp implements ISpecialityService {
     @Transactional
     @Override
     public Optional<SpecialtyEntity> findByName(String name) {
+
         return specialityRepository.findByName(name);
     }
 

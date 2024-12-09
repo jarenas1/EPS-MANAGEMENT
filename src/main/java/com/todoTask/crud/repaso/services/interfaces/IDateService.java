@@ -18,6 +18,7 @@ public interface IDateService {
     List<DateEntity> findByDoctorAndStatus(Long doctorId, DateStatus status);
     ResponseEntity<DateEntity> save(DateWOStatus dateWOStatus);
     ResponseEntity<DateEntity>putDateAsDone(Long dateId);
+    ResponseEntity<DateEntity> cancelDate(Long dateId);
     ResponseEntity<DateEntity> update(DateEntity dateEntity);
     Page<DateEntity> findAll(Pageable pageable);
     Boolean delete(Long id);

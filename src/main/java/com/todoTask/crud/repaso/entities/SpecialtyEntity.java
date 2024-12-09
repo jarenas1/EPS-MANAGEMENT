@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,5 +24,6 @@ public class SpecialtyEntity {
     private String description;
 
     @OneToMany(mappedBy = "specialty")
+    @JsonIgnore
     private List<DoctorEntity> doctors;
 }

@@ -78,9 +78,9 @@ public class DateServiceImp implements IDateService {
     @Override
     public ResponseEntity<DateEntity> rescheduleDate(Long id, LocalDateTime newDate){
         DateEntity dateEntity = dateRepository.findById(id).orElseThrow(()->new DateNotFoundException("No encuentro la cita pa"));
+        dateEntity.setDateTime(newDate);
         checkIfDoctorIsAvalible(dateEntity);
         validateConflictsDates(dateEntity);
-        dateEntity.setDateTime(newDate);
         dateEntity.setStatus(DateStatus.SCHEDULED);
         DateEntity date = dateRepository.save(dateEntity);
 
@@ -132,6 +132,7 @@ public class DateServiceImp implements IDateService {
         }
     }
 
+    @Override
     @Transactional
     public ResponseEntity<DateEntity> cancelDate(Long dateId) {
         DateEntity dateEntity = dateRepository.findById(dateId)

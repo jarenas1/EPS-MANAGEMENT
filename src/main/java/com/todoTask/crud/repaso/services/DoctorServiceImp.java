@@ -33,7 +33,7 @@ public class DoctorServiceImp implements IDoctorService {
     @Override
     public ResponseEntity<?> findBySpeciality(Long idSpecialty) {
 
-        List<DoctorEntity> doctorEntities = doctorRepository.findBySpeciality(
+        List<DoctorEntity> doctorEntities = doctorRepository.findBySpecialty(
                 specialityRepository.findById(idSpecialty).orElseThrow(
                         ()-> new SpecialityNotFoundException("we cant found the speciality")));
 

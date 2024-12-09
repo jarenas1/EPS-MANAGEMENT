@@ -18,8 +18,8 @@ public class DoctorController {
     @Autowired
     IDoctorService doctorService;
 
-    @GetMapping("/speciality/{id}")
-    public ResponseEntity<?> findBySpeciality(Long specialityId){
+    @GetMapping("/speciality/{specialityId}")
+    public ResponseEntity<?> findBySpeciality(@PathVariable Long specialityId){
         return doctorService.findBySpeciality(specialityId);
     }
 

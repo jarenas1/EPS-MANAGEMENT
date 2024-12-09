@@ -3,11 +3,13 @@ package com.todoTask.crud.repaso.controllers;
 import com.todoTask.crud.repaso.dto.request.DateWOStatus;
 import com.todoTask.crud.repaso.entities.DateEntity;
 import com.todoTask.crud.repaso.services.DateServiceImp;
+import com.todoTask.crud.repaso.services.interfaces.IDateService;
 import com.todoTask.crud.repaso.tools.enums.DateStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +20,9 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/dates")
 public class DateController {
+
     @Autowired
-    DateServiceImp dateServiceImp;
+    IDateService dateServiceImp;
 
     @GetMapping("/between/{id}/{start}/{end}")
     public ResponseEntity<List<DateEntity>> findByDoctorAndDateTimeBetween(@PathVariable Long id, @PathVariable LocalDateTime start, @PathVariable LocalDateTime end){
@@ -39,8 +42,8 @@ public class DateController {
         return ResponseEntity.ok(dates);
     }
 
-    @PatchMapping("/reshudel/{id}/{date}")
-    public ResponseEntity<DateEntity> rescheduleDate(@PathVariable Long id, @PathVariable LocalDateTime newDate){
+    @PatchMapping("/reshudel/{id}")
+    public ResponseEntity<DateEntity> rescheduleDate(@PathVariable Long id,  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime newDate){
         return dateServiceImp.rescheduleDate(id, newDate);
     }
 
