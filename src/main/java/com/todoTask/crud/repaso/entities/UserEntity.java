@@ -31,9 +31,6 @@ public class UserEntity {
     @Column(unique = true)
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    private RoleUser role;
-
     private Boolean active;
 
     @OneToOne(mappedBy = "user")
@@ -97,14 +94,6 @@ public class UserEntity {
         this.patient = patient;
     }
 
-    public RoleUser getRole() {
-        return role;
-    }
-
-    public void setRole(RoleUser role) {
-        this.role = role;
-    }
-
     public Set<RoleUser> getRoles() {
         return roles;
     }
@@ -118,6 +107,14 @@ public class UserEntity {
     }
 
     public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public UserEntity(Boolean active, String email, String password, Set<RoleUser> roles, String username) {
+        this.active = active;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
         this.username = username;
     }
 }

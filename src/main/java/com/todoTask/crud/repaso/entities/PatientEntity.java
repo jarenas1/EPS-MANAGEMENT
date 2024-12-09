@@ -33,4 +33,11 @@ public class PatientEntity {
     @OneToMany(mappedBy = "patient")
     private List<DateEntity> dates;
 
+
+    public PatientEntity(String document, String lastname, String name, UserEntity user) {
+        this.document = document;
+        this.lastname = lastname;
+        this.name = name;
+        this.user = user;
+    }
 }

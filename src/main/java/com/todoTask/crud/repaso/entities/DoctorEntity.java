@@ -92,4 +92,11 @@ public class DoctorEntity {
     public void setUser(UserEntity user) {
         this.user = user;
     }
+
+    public DoctorEntity(String lastname, String name, SpecialtyEntity specialty, UserEntity user) {
+        this.lastname = lastname;
+        this.name = name;
+        this.specialty = specialty;
+        this.user = user;
+    }
 }

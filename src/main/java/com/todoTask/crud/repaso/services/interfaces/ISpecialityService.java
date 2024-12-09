@@ -12,4 +12,5 @@ public interface ISpecialityService {
     ResponseEntity<SpecialtyEntity> save(SpecialtyEntity specialty);
     Boolean delete(Long id);
     ResponseEntity<SpecialtyEntity> update(SpecialtyEntity specialty);
+    SpecialtyEntity findById(Long id);
 }

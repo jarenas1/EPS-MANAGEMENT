@@ -1,6 +1,7 @@
 package com.todoTask.crud.repaso.services;
 
 import com.todoTask.crud.repaso.entities.SpecialtyEntity;
+import com.todoTask.crud.repaso.error_handler.SpecialityNotFoundException;
 import com.todoTask.crud.repaso.repositories.SpecialityRepository;
 import com.todoTask.crud.repaso.services.interfaces.ISpecialityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,10 @@ public class SpecialityServiceImp implements ISpecialityService {
     public ResponseEntity<SpecialtyEntity> update(SpecialtyEntity specialty) {
         SpecialtyEntity specialtyUpdated = specialityRepository.save(specialty);
         return ResponseEntity.status(HttpStatus.OK).body(specialtyUpdated);
+    }
+
+    @Override
+    public SpecialtyEntity findById(Long id) {
+        return specialityRepository.findById(id).orElseThrow(()-> new SpecialityNotFoundException("We cant found the specialty my frend"));
     }
 }
