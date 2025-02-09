@@ -1,13 +1,8 @@
 package com.todoTask.crud.repaso.dto.request;
 
-import com.todoTask.crud.repaso.tools.enums.RoleUser;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import com.todoTask.crud.repaso.tools.enums.RoleEnum;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class UserDTO {
@@ -34,13 +29,13 @@ public class UserDTO {
 
     private Boolean isDoctor = false;
 
-    private Set<RoleUser> roles = new HashSet<>();
+    private Set<RoleEnum> roles = new HashSet<>();
 
-    public Set<RoleUser> getRoles() {
+    public Set<RoleEnum> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<RoleUser> roles) {
+    public void setRoles(Set<RoleEnum> roles) {
         this.roles = roles;
     }
 

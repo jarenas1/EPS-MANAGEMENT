@@ -1,13 +1,12 @@
 package com.todoTask.crud.repaso.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.todoTask.crud.repaso.tools.enums.RoleUser;
+import com.todoTask.crud.repaso.tools.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.print.Doc;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,8 +21,11 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String username;
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
+    private String lastname;
 
     @Column(nullable = false)
     private String password;
@@ -44,77 +46,7 @@ public class UserEntity {
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private Set<RoleUser> roles = new HashSet<>();
+    private Set<RoleEnum> roles = new HashSet<>();
 
-    public Boolean getActive() {
-        return active;
-    }
 
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public DoctorEntity getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(DoctorEntity doctor) {
-        this.doctor = doctor;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public PatientEntity getPatient() {
-        return patient;
-    }
-
-    public void setPatient(PatientEntity patient) {
-        this.patient = patient;
-    }
-
-    public Set<RoleUser> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<RoleUser> roles) {
-        this.roles = roles;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public UserEntity(Boolean active, String email, String password, Set<RoleUser> roles, String username) {
-        this.active = active;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-        this.username = username;
-    }
 }
