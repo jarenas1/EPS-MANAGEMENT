@@ -1,7 +1,6 @@
 package com.todoTask.crud.repaso.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.todoTask.crud.repaso.tools.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,11 +41,7 @@ public class UserEntity {
     @JsonIgnore
     private DoctorEntity doctor;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private Set<RoleEnum> roles = new HashSet<>();
-
-
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roles = new HashSet<>();
 }

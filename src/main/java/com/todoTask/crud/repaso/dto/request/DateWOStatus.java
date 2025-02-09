@@ -7,9 +7,15 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-//WO STATUS AND WO DURATION
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DateWOStatus {
     private LocalDateTime dateTime;
 
@@ -20,55 +26,4 @@ public class DateWOStatus {
     private PatientEntity patient;
 
     private DoctorEntity doctor;
-
-    public DateWOStatus(LocalDateTime dateTime, DoctorEntity doctor, String notes, PatientEntity patient, String reason) {
-        this.dateTime = dateTime;
-        this.doctor = doctor;
-        this.notes = notes;
-        this.patient = patient;
-        this.reason = reason;
-    }
-
-    public DateWOStatus() {
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
-    public DoctorEntity getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(DoctorEntity doctor) {
-        this.doctor = doctor;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public PatientEntity getPatient() {
-        return patient;
-    }
-
-    public void setPatient(PatientEntity patient) {
-        this.patient = patient;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
 }

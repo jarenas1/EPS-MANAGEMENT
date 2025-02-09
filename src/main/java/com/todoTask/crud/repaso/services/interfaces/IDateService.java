@@ -19,7 +19,8 @@ public interface IDateService {
     ResponseEntity<DateEntity> save(DateWOStatus dateWOStatus);
     ResponseEntity<DateEntity>putDateAsDone(Long dateId);
     ResponseEntity<DateEntity> cancelDate(Long dateId);
-    ResponseEntity<DateEntity> update(DateEntity dateEntity);
+    ResponseEntity<DateEntity> update(DateWOStatus dateEntity);
+    ResponseEntity<DateEntity> updateNotes(String notes, Long dateId);
     Page<DateEntity> findAll(Pageable pageable);
     Boolean delete(Long id);
     ResponseEntity<DateEntity> rescheduleDate(Long id, LocalDateTime newDate);

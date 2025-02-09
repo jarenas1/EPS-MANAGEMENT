@@ -77,23 +77,28 @@ public class DateServiceImp implements IDateService {
     @Transactional
     @Override
     public ResponseEntity<DateEntity> rescheduleDate(Long id, LocalDateTime newDate){
-        DateEntity dateEntity = dateRepository.findById(id).orElseThrow(()->new DateNotFoundException("No encuentro la cita pa"));
+        DateEntity dateEntity = dateRepository.findById(id).orElseThrow(()->new DateNotFoundException("We cant found the date with the id " + id));
         dateEntity.setDateTime(newDate);
         checkIfDoctorIsAvalible(dateEntity);
         validateConflictsDates(dateEntity);
         dateEntity.setStatus(DateStatus.SCHEDULED);
         DateEntity date = dateRepository.save(dateEntity);
-
         return ResponseEntity.ok(date);
     }
 
     @Transactional
     @Override
     public ResponseEntity<DateEntity> save(DateWOStatus dateWOStatust) {
-        DateEntity dateEntity = new DateEntity(dateWOStatust.getDateTime(),dateWOStatust.getDoctor(), 30, dateWOStatust.getNotes(), dateWOStatust.getPatient(), dateWOStatust.getReason());
+        DateEntity dateEntity = DateEntity.builder()
+                .dateTime(dateWOStatust.getDateTime())
+                .notes(dateWOStatust.getNotes())
+                .patient(dateWOStatust.getPatient())
+                .reason(dateWOStatust.getReason())
+                .doctor(dateWOStatust.getDoctor())
+                .status(DateStatus.SCHEDULED)
+                .build();
         checkIfDoctorIsAvalible(dateEntity);
         validateConflictsDates(dateEntity);
-        dateEntity.setStatus(DateStatus.SCHEDULED);
         DateEntity dateEntityCreated = dateRepository.save(dateEntity);
         return ResponseEntity.status(HttpStatus.CREATED).body(dateEntityCreated);
     }
@@ -110,8 +115,8 @@ public class DateServiceImp implements IDateService {
         );
         boolean validShift = dailyShifts.stream()
                 .anyMatch(shift ->
-                        !dateHour.isBefore(shift.getStartTime()) &&
-                                !dateHour.isAfter(shift.getEndTime())
+                        !dateHour.isBefore(LocalTime.from(shift.getStartTime())) &&
+                                !dateHour.isAfter(LocalTime.from(shift.getEndTime()))
                 );
         if (!validShift) {
             throw new DateOverTheHourException("The date is over the doctor shift");
@@ -136,15 +141,29 @@ public class DateServiceImp implements IDateService {
     @Transactional
     public ResponseEntity<DateEntity> cancelDate(Long dateId) {
         DateEntity dateEntity = dateRepository.findById(dateId)
-                .orElseThrow(() -> new DateNotFoundException("Twe cant found the date"));
+                .orElseThrow(() -> new DateNotFoundException("We cant found the date"));
         dateEntity.setStatus(DateStatus.CANCELED);
         return ResponseEntity.ok(dateRepository.save(dateEntity));
     }
 
     @Override
-    public ResponseEntity<DateEntity> update(DateEntity dateEntity) {
+    public ResponseEntity<DateEntity> update(DateWOStatus dateWOStatus) {
+        DateEntity dateEntity = DateEntity.builder()
+                .dateTime(dateWOStatus.getDateTime())
+                .notes(dateWOStatus.getNotes())
+                .patient(dateWOStatus.getPatient())
+                .reason(dateWOStatus.getReason())
+                .doctor(dateWOStatus.getDoctor())
+                .build();
         DateEntity dateUpdated = dateRepository.save(dateEntity);
         return ResponseEntity.ok(dateUpdated);
+    }
+
+    @Override
+    public ResponseEntity<DateEntity> updateNotes(String notes, Long dateId) {
+        DateEntity dateEntity = dateRepository.findById(dateId).orElseThrow(() -> new DateNotFoundException("We cant found the date"));
+        dateEntity.setNotes(notes);
+        return ResponseEntity.ok(dateRepository.save(dateEntity));
     }
 
     @Transactional
