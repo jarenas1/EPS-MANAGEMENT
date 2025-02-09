@@ -17,12 +17,6 @@ public class PatientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String lastname;
-
     @Column(unique = true)
     private String document;
 
@@ -32,12 +26,4 @@ public class PatientEntity {
 
     @OneToMany(mappedBy = "patient")
     private List<DateEntity> dates;
-
-
-    public PatientEntity(String document, String lastname, String name, UserEntity user) {
-        this.document = document;
-        this.lastname = lastname;
-        this.name = name;
-        this.user = user;
-    }
 }
