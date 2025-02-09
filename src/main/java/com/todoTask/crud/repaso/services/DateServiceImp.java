@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.services;
 
+import com.todoTask.crud.repaso.dto.request.DateCreationDTOIdStatus;
 import com.todoTask.crud.repaso.dto.request.DateWOStatus;
 import com.todoTask.crud.repaso.entities.DateEntity;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
@@ -88,7 +89,7 @@ public class DateServiceImp implements IDateService {
 
     @Transactional
     @Override
-    public ResponseEntity<DateEntity> save(DateWOStatus dateWOStatust) {
+    public ResponseEntity<DateEntity> save(DateCreationDTOIdStatus dateWOStatust) {
         DateEntity dateEntity = DateEntity.builder()
                 .dateTime(dateWOStatust.getDateTime())
                 .notes(dateWOStatust.getNotes())
@@ -149,6 +150,7 @@ public class DateServiceImp implements IDateService {
     @Override
     public ResponseEntity<DateEntity> update(DateWOStatus dateWOStatus) {
         DateEntity dateEntity = DateEntity.builder()
+                .id(dateWOStatus.getId())
                 .dateTime(dateWOStatus.getDateTime())
                 .notes(dateWOStatus.getNotes())
                 .patient(dateWOStatus.getPatient())

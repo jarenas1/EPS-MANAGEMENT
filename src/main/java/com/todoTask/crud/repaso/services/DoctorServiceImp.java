@@ -32,11 +32,9 @@ public class DoctorServiceImp implements IDoctorService {
     @Transactional(readOnly = true)
     @Override
     public ResponseEntity<?> findBySpeciality(Long idSpecialty) {
-
         List<DoctorEntity> doctorEntities = doctorRepository.findBySpecialty(
                 specialityRepository.findById(idSpecialty).orElseThrow(
                         ()-> new SpecialityNotFoundException("we cant found the speciality")));
-
         return ResponseEntity.ok(doctorEntities);
     }
 
@@ -50,7 +48,8 @@ public class DoctorServiceImp implements IDoctorService {
     @Transactional
     @Override
     public ResponseEntity<DoctorEntity> update(DoctorEntity doctorEntity) {
-        DoctorEntity doctorSaved = doctorRepository.save(doctorEntity);
+        DoctorEntity doctorToUpdate = doctorRepository.findById(doctorEntity.getId()).orElseThrow(() -> new DoctorNotFoundException("we cant found the doctor"));
+        doctorToUpdate
         return ResponseEntity.ok(doctorSaved);
     }
 

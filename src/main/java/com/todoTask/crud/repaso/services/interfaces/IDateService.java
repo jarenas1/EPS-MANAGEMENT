@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.services.interfaces;
 
+import com.todoTask.crud.repaso.dto.request.DateCreationDTOIdStatus;
 import com.todoTask.crud.repaso.dto.request.DateWOStatus;
 import com.todoTask.crud.repaso.entities.DateEntity;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
@@ -16,7 +17,7 @@ public interface IDateService {
     List<DateEntity> findByDoctorAndDateTimeBetween(Long doctorId, LocalDateTime start, LocalDateTime end);
     List<DateEntity> findByPatientAndStatus(Long PatientId, DateStatus status);
     List<DateEntity> findByDoctorAndStatus(Long doctorId, DateStatus status);
-    ResponseEntity<DateEntity> save(DateWOStatus dateWOStatus);
+    ResponseEntity<DateEntity> save(DateCreationDTOIdStatus dateWOStatus);
     ResponseEntity<DateEntity>putDateAsDone(Long dateId);
     ResponseEntity<DateEntity> cancelDate(Long dateId);
     ResponseEntity<DateEntity> update(DateWOStatus dateEntity);
