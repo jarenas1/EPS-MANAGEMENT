@@ -74,7 +74,7 @@ public class DoctorServiceImp implements IDoctorService {
     @Override
     public ResponseEntity<DoctorEntity> update(DoctorUpdateDTO doctorEntity) {
         DoctorEntity doctorToUpdate = doctorRepository.findById(doctorEntity.getId()).orElseThrow(() -> new DoctorNotFoundException("we cant found the doctor"));
-        UserEntity userToUpdate = userRepository.findByDoctorEntity(doctorToUpdate).orElseThrow(() -> new DoctorNotFoundException("We cant found a user associated with the doctor"));
+        UserEntity userToUpdate = userRepository.findByDoctor(doctorToUpdate).orElseThrow(() -> new DoctorNotFoundException("We cant found a user associated with the doctor"));
         SpecialtyEntity specialtyEntity = specialityRepository.findByName(doctorEntity.getSpecialty()).orElseThrow(() -> new SpecialityNotFoundException("we cant found the speciality"));
         doctorToUpdate.setSpecialty(specialtyEntity);
         //Updating User base data

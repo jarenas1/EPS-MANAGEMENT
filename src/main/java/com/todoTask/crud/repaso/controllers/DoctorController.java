@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.controllers;
 
+import com.todoTask.crud.repaso.dto.request.DoctorUpdateDTO;
 import com.todoTask.crud.repaso.entities.DateEntity;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.services.interfaces.IDoctorService;
@@ -29,7 +30,7 @@ public class DoctorController {
 //    }
 
     @PutMapping("/update")
-    public ResponseEntity<DoctorEntity> update(@RequestBody DoctorEntity doctor){
+    public ResponseEntity<DoctorEntity> update(@RequestBody DoctorUpdateDTO doctor){
         return doctorService.update(doctor);
     }
 

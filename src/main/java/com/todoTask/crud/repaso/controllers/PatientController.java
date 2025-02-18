@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.controllers;
 
+import com.todoTask.crud.repaso.dto.request.PatientUpdateDTO;
 import com.todoTask.crud.repaso.entities.DateEntity;
 import com.todoTask.crud.repaso.entities.PatientEntity;
 import com.todoTask.crud.repaso.error_handler.PatientNotFoundException;
@@ -31,11 +32,11 @@ public class PatientController {
 //    public ResponseEntity<PatientEntity> create (@RequestBody PatientEntity patientEntity){
 //        return iPatientService.save(patientEntity);
 //    }
-//
-//    @PutMapping("/update")
-//    public  ResponseEntity<PatientEntity> update(@RequestBody PatientEntity patientEntity){
-//        return iPatientService.save(patientEntity);
-//    }
+
+    @PutMapping("/update")
+    public  ResponseEntity<PatientEntity> update(@RequestBody PatientUpdateDTO patientEntity){
+        return iPatientService.update(patientEntity);
+    }
 
     @GetMapping()
     public ResponseEntity<Page<PatientEntity>> findAll(Pageable pageable){
