@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.controllers;
 
+import com.todoTask.crud.repaso.dto.request.DateCreationDTOIdStatus;
 import com.todoTask.crud.repaso.dto.request.DateWOStatus;
 import com.todoTask.crud.repaso.entities.DateEntity;
 import com.todoTask.crud.repaso.services.DateServiceImp;
@@ -48,7 +49,7 @@ public class DateController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<DateEntity> create(@RequestBody DateWOStatus dateWOStatus){
+    public ResponseEntity<DateEntity> create(@RequestBody DateCreationDTOIdStatus dateWOStatus){
         return dateServiceImp.save(dateWOStatus);
     }
 
@@ -58,7 +59,7 @@ public class DateController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<DateEntity> update(@RequestBody DateEntity dateEntity){
+    public ResponseEntity<DateEntity> update(@RequestBody DateWOStatus dateEntity){
         return dateServiceImp.update(dateEntity);
     }
 

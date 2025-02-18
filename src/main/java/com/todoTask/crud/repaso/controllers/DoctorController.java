@@ -23,10 +23,10 @@ public class DoctorController {
         return doctorService.findBySpeciality(specialityId);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<DoctorEntity> create(@RequestBody DoctorEntity doctor){
-        return doctorService.save(doctor);
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<DoctorEntity> create(@RequestBody DoctorEntity doctor){
+//        return doctorService.save(doctor);
+//    }
 
     @PutMapping("/update")
     public ResponseEntity<DoctorEntity> update(@RequestBody DoctorEntity doctor){

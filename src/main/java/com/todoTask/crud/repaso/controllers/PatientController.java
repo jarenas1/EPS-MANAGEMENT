@@ -27,15 +27,15 @@ public class PatientController {
         return ResponseEntity.ok(patientEntity);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<PatientEntity> create (@RequestBody PatientEntity patientEntity){
-        return iPatientService.save(patientEntity);
-    }
-
-    @PutMapping("/update")
-    public  ResponseEntity<PatientEntity> update(@RequestBody PatientEntity patientEntity){
-        return iPatientService.save(patientEntity);
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<PatientEntity> create (@RequestBody PatientEntity patientEntity){
+//        return iPatientService.save(patientEntity);
+//    }
+//
+//    @PutMapping("/update")
+//    public  ResponseEntity<PatientEntity> update(@RequestBody PatientEntity patientEntity){
+//        return iPatientService.save(patientEntity);
+//    }
 
     @GetMapping()
     public ResponseEntity<Page<PatientEntity>> findAll(Pageable pageable){

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface IPatientService {
     Optional<PatientEntity> findByDocument(String document);
-    ResponseEntity<PatientEntity> save(PatientEntity patientEntity);
+//    ResponseEntity<PatientEntity> save(PatientEntity patientEntity);
     ResponseEntity<PatientEntity> update(PatientEntity patientEntity);
     Page<PatientEntity> findAll(Pageable pageable);
     Boolean delete(Long id);

@@ -3,6 +3,7 @@ package com.todoTask.crud.repaso.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -32,7 +34,7 @@ public class UserEntity {
     @Column(unique = true)
     private String email;
 
-    private Boolean active;
+    private Boolean active = true;
 
     @OneToOne(mappedBy = "user")
     private PatientEntity patient;
