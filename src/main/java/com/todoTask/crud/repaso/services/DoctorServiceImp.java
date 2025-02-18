@@ -1,6 +1,7 @@
 package com.todoTask.crud.repaso.services;
 
 import com.todoTask.crud.repaso.dto.request.DoctorCreateDTO;
+import com.todoTask.crud.repaso.dto.request.DoctorUpdateDTO;
 import com.todoTask.crud.repaso.entities.*;
 import com.todoTask.crud.repaso.error_handler.DoctorNotFoundException;
 import com.todoTask.crud.repaso.error_handler.PatientNotFoundException;
@@ -71,11 +72,17 @@ public class DoctorServiceImp implements IDoctorService {
 
     @Transactional
     @Override
-    public ResponseEntity<DoctorEntity> update(DoctorEntity doctorEntity) {
+    public ResponseEntity<DoctorEntity> update(DoctorUpdateDTO doctorEntity) {
         DoctorEntity doctorToUpdate = doctorRepository.findById(doctorEntity.getId()).orElseThrow(() -> new DoctorNotFoundException("we cant found the doctor"));
-        doctorToUpdate.setId(doctorEntity.getId());
-        doctorToUpdate.setShifts(doctorEntity.getShifts());
-        doctorToUpdate.setSpecialty(doctorEntity.getSpecialty());
+        UserEntity userToUpdate = userRepository.findByDoctorEntity(doctorToUpdate).orElseThrow(() -> new DoctorNotFoundException("We cant found a user associated with the doctor"));
+        SpecialtyEntity specialtyEntity = specialityRepository.findByName(doctorEntity.getSpecialty()).orElseThrow(() -> new SpecialityNotFoundException("we cant found the speciality"));
+        doctorToUpdate.setSpecialty(specialtyEntity);
+        //Updating User base data
+        userToUpdate.setName(doctorEntity.getName());
+        userToUpdate.setEmail(doctorEntity.getEmail());
+        userToUpdate.setLastname(doctorEntity.getLastname());
+        userRepository.save(userToUpdate);
+        doctorRepository.save(doctorToUpdate);
         return ResponseEntity.ok(doctorRepository.save(doctorToUpdate));
     }
 

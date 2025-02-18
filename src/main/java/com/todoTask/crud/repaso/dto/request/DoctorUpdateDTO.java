@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class DoctoUpdateDTO {
+public class DoctorUpdateDTO {
 
     private Long id;
 
