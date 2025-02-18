@@ -9,6 +9,6 @@ public record AuthCreateUserPatient(
         @NotBlank String password,
         @NotNull String name,
         @NotNull String lastname,
-        @Valid AuthCreateRoleRequest roleRequest
+        @NotNull String cedula
 ) {
 }

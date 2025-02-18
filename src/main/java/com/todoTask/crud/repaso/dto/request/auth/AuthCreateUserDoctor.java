@@ -9,7 +9,6 @@ public record AuthCreateUserDoctor(
         @NotBlank String password,
         @NotNull String name,
         @NotNull String lastname,
-        @NotNull String specialty,
-        @Valid AuthCreateRoleRequest roleRequest
+        @NotNull String specialty
 ) {
 }

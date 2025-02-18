@@ -1,9 +1,6 @@
 package com.todoTask.crud.repaso.services;
 
-import com.todoTask.crud.repaso.dto.request.auth.AuthCreateUserAdmin;
-import com.todoTask.crud.repaso.dto.request.auth.AuthCreateUserDoctor;
-import com.todoTask.crud.repaso.dto.request.auth.AuthLoginRequest;
-import com.todoTask.crud.repaso.dto.request.auth.AuthResponse;
+import com.todoTask.crud.repaso.dto.request.auth.*;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.PatientEntity;
 import com.todoTask.crud.repaso.entities.UserEntity;
@@ -104,7 +101,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         UserEntity userEntity = UserEntity.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .roles(Set.of(roleRepository.findRoleByRoleEnum(RoleEnum.ROLE_ADMIN.name()).get()))
+                .roles(Set.of(roleRepository.findRoleByRoleEnum(RoleEnum.ROLE_ADMIN).get()))
                 .lastname(authCreateUser.lastname())
                 .name(authCreateUser.name())
                 .build();
@@ -116,14 +113,14 @@ public class UserDetailsService implements org.springframework.security.core.use
         return new AuthResponse(userCreated.getEmail(), "user created", userLogged.token(), true);
     }
 
-    public AuthResponse CreateUserDoctor(AuthCreateUserDoctor authCreateUser){
+    public AuthResponse createUserDoctor(AuthCreateUserDoctor authCreateUser){
         String email = authCreateUser.email();
         String password = authCreateUser.password();
 
         UserEntity userEntity = UserEntity.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .roles(Set.of(roleRepository.findRoleByRoleEnum(RoleEnum.ROLE_DOCTOR.name()).get()))
+                .roles(Set.of(roleRepository.findRoleByRoleEnum(RoleEnum.ROLE_DOCTOR).get()))
                 .lastname(authCreateUser.lastname())
                 .name(authCreateUser.name())
                 .build();
@@ -143,14 +140,14 @@ public class UserDetailsService implements org.springframework.security.core.use
         return new AuthResponse(userSaved.getEmail(), "user created", userLogged.token(), true);
     }
 
-    public AuthResponse CreateUserPatient(AuthCreateUserDoctor authCreateUser){
+    public AuthResponse createUserPatient(AuthCreateUserPatient authCreateUser){
         String email = authCreateUser.email();
         String password = authCreateUser.password();
 
         UserEntity userEntity = UserEntity.builder()
                 .email(email)
                 .password(passwordEncoder.encode(password))
-                .roles(Set.of(roleRepository.findRoleByRoleEnum(RoleEnum.ROLE_PATIENT.name()).get()))
+                .roles(Set.of(roleRepository.findRoleByRoleEnum(RoleEnum.ROLE_PATIENT).get()))
                 .lastname(authCreateUser.lastname())
                 .name(authCreateUser.name())
                 .build();
@@ -159,6 +156,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
         PatientEntity patientEntity = PatientEntity.builder()
                 .user(userSaved)
+                .document(authCreateUser.cedula())
                 .build();
 
         patientRepository.save(patientEntity);
