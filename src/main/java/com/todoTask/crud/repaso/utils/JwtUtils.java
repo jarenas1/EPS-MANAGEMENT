@@ -1,12 +1,17 @@
 package com.todoTask.crud.repaso.utils;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -39,5 +44,32 @@ public class JwtUtils {
                 .withNotBefore(new Date(System.currentTimeMillis()))
                 .sign(algorithm);
         return token;
+    }
+
+    public DecodedJWT validateToken(String token) {
+        try{
+            Algorithm algorithm = Algorithm.HMAC256(jwtPrivateKey);
+
+            JWTVerifier verifier = JWT.require(algorithm)
+                    .withIssuer(this.jwtUserGenerator).build();
+
+            DecodedJWT jwt = verifier.verify(token);
+            return jwt;
+        }catch (JWTVerificationException e){
+            throw new JWTVerificationException("Invalid JWT");
+        }
+    }
+
+    public String getEmail(DecodedJWT token) {
+        return token.getSubject().toString();
+    }
+
+    public Claim getSpecificClamin(DecodedJWT decodedJWT, String claimName){
+        return decodedJWT.getClaim(claimName);
+    }
+
+
+    public Map<String, Claim> getAllClaims(DecodedJWT decodedJWT){
+        return decodedJWT.getClaims();
     }
 }
