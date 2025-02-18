@@ -2,9 +2,12 @@ package com.todoTask.crud.repaso.repositories;
 
 
 import com.todoTask.crud.repaso.entities.RoleEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface RoleRepository {
-    Optional<RoleEntity> findRoleByName(String roleName);
+@Repository
+public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
+    Optional<RoleEntity> findRoleByRoleEnum(String roleName);
 }

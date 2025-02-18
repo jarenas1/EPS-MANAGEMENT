@@ -1,6 +1,7 @@
 package com.todoTask.crud.repaso.config.security;
 
 import com.todoTask.crud.repaso.config.security.filter.JwtTokenValidator;
+import com.todoTask.crud.repaso.services.UserDetailsService;
 import com.todoTask.crud.repaso.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -49,7 +50,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(UserDetailServiceImpl userDetailService){
+    public AuthenticationProvider authenticationProvider(UserDetailsService userDetailService){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsService(userDetailService);
