@@ -10,18 +10,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
-public class JwtUtils {
+public class JwtUtil {
 
     @Value("${security.jwt.private}")
     private String jwtPrivateKey;
 
-    @Value("${security.jwt.user.generator]")
+    @Value("${security.jwt.user.generator}")
     private String jwtUserGenerator;
 
     public String createToken(Authentication authentication) {
