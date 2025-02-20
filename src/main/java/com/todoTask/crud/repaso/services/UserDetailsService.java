@@ -1,6 +1,7 @@
 package com.todoTask.crud.repaso.services;
 
 import com.todoTask.crud.repaso.dto.request.auth.*;
+import com.todoTask.crud.repaso.dto.response.AuthResponse;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.PatientEntity;
 import com.todoTask.crud.repaso.entities.UserEntity;

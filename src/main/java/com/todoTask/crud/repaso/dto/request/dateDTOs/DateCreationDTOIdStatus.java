@@ -1,4 +1,4 @@
-package com.todoTask.crud.repaso.dto.request;
+package com.todoTask.crud.repaso.dto.request.dateDTOs;
 
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.PatientEntity;

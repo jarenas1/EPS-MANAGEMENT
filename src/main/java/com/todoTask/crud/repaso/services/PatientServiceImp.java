@@ -1,6 +1,6 @@
 package com.todoTask.crud.repaso.services;
 
-import com.todoTask.crud.repaso.dto.request.PatientUpdateDTO;
+import com.todoTask.crud.repaso.dto.request.patientDTOs.PatientUpdateDTO;
 import com.todoTask.crud.repaso.entities.PatientEntity;
 import com.todoTask.crud.repaso.entities.UserEntity;
 import com.todoTask.crud.repaso.error_handler.PatientNotFoundException;
@@ -10,12 +10,10 @@ import com.todoTask.crud.repaso.services.interfaces.IPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.MessageFormat;
 import java.util.Optional;
 
 @Service

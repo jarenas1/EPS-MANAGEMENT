@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.todoTask.crud.repaso.tools.enums.Day;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "shifts")
 public class ShiftEntity {
     @Id
@@ -29,6 +31,13 @@ public class ShiftEntity {
     private LocalDateTime endTime;
 
     private Boolean active = true;
+
+    @PrePersist
+    public void prePersist() {
+        if (active == null) {
+            active = true;
+        }
+    }
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")

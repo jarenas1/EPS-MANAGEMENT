@@ -1,6 +1,7 @@
 package com.todoTask.crud.repaso.controllers;
 
 import com.todoTask.crud.repaso.dto.request.auth.*;
+import com.todoTask.crud.repaso.dto.response.AuthResponse;
 import com.todoTask.crud.repaso.services.UserDetailsService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

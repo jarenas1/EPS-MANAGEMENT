@@ -1,28 +1,22 @@
 package com.todoTask.crud.repaso.services;
 
-import com.todoTask.crud.repaso.dto.request.DoctorCreateDTO;
-import com.todoTask.crud.repaso.dto.request.DoctorUpdateDTO;
+import com.todoTask.crud.repaso.dto.request.doctorDTOs.DoctorUpdateDTO;
 import com.todoTask.crud.repaso.entities.*;
 import com.todoTask.crud.repaso.error_handler.DoctorNotFoundException;
-import com.todoTask.crud.repaso.error_handler.PatientNotFoundException;
 import com.todoTask.crud.repaso.error_handler.SpecialityNotFoundException;
 import com.todoTask.crud.repaso.repositories.DoctorRepository;
 import com.todoTask.crud.repaso.repositories.SpecialityRepository;
 import com.todoTask.crud.repaso.repositories.UserRepository;
 import com.todoTask.crud.repaso.services.interfaces.IDoctorService;
-import com.todoTask.crud.repaso.tools.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class DoctorServiceImp implements IDoctorService {

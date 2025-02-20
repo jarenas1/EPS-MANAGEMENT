@@ -1,5 +1,7 @@
 package com.todoTask.crud.repaso.services;
 
+import com.todoTask.crud.repaso.dto.request.shiftDTOs.ShiftCreateDto;
+import com.todoTask.crud.repaso.dto.request.shiftDTOs.ShiftUpdateDto;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.ShiftEntity;
 import com.todoTask.crud.repaso.error_handler.DoctorNotFoundException;
@@ -52,15 +54,26 @@ public class ShiftServiceImp implements IShiftService {
     }
 
     @Override
-    public ResponseEntity<ShiftEntity> save(ShiftEntity shiftEntity) {
-        ShiftEntity shiftEntitySaved = shiftRepository.save(shiftEntity);
-        return ResponseEntity.status(HttpStatus.CREATED).body(shiftEntity);
+    public ResponseEntity<ShiftEntity> save(ShiftCreateDto shiftEntity) {
+        DoctorEntity doctorEntity = doctorRepository.findById(shiftEntity.getDoctorId()).orElseThrow(()-> new DoctorNotFoundException("we cant found the doctor"));
+        ShiftEntity shiftToSave = ShiftEntity.builder()
+                .day(shiftEntity.getDay())
+                .startTime(shiftEntity.getStartTime())
+                .endTime(shiftEntity.getEndTime())
+                .doctor(doctorEntity)
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(shiftRepository.save(shiftToSave));
     }
 
     @Override
-    public ResponseEntity<ShiftEntity> update(ShiftEntity shiftEntity) {
-        ShiftEntity shiftEntityUpdated = shiftRepository.save(shiftEntity);
-        return ResponseEntity.status(HttpStatus.OK).body(shiftEntityUpdated);
+    public ResponseEntity<ShiftEntity> update(ShiftUpdateDto shiftEntity) {
+        ShiftEntity shiftToUpdate = ShiftEntity.builder()
+                .id(shiftEntity.getId())
+                .day(shiftEntity.getDay())
+                .startTime(shiftEntity.getStartTime())
+                .endTime(shiftEntity.getEndTime())
+                .build();
+        return ResponseEntity.status(HttpStatus.OK).body(shiftRepository.save(shiftToUpdate));
     }
 
     @Override

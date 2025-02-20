@@ -1,7 +1,6 @@
 package com.todoTask.crud.repaso.controllers;
 
-import com.todoTask.crud.repaso.dto.request.PatientUpdateDTO;
-import com.todoTask.crud.repaso.entities.DateEntity;
+import com.todoTask.crud.repaso.dto.request.patientDTOs.PatientUpdateDTO;
 import com.todoTask.crud.repaso.entities.PatientEntity;
 import com.todoTask.crud.repaso.error_handler.PatientNotFoundException;
 import com.todoTask.crud.repaso.services.interfaces.IPatientService;
@@ -10,9 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/patients")

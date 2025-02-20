@@ -36,6 +36,13 @@ public class UserEntity {
 
     private Boolean active = true;
 
+    @PrePersist
+    public void prePersist() {
+        if (active == null) {
+            active = true;
+        }
+    }
+
     @OneToOne(mappedBy = "user")
     @JsonIgnore
     private PatientEntity patient;

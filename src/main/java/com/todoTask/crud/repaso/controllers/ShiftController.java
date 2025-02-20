@@ -1,5 +1,7 @@
 package com.todoTask.crud.repaso.controllers;
 
+import com.todoTask.crud.repaso.dto.request.shiftDTOs.ShiftCreateDto;
+import com.todoTask.crud.repaso.dto.request.shiftDTOs.ShiftUpdateDto;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.ShiftEntity;
 import com.todoTask.crud.repaso.services.interfaces.IShiftService;
@@ -54,12 +56,12 @@ public class ShiftController {
     }
 
     @PostMapping
-    public ResponseEntity<ShiftEntity> createShift(@RequestBody ShiftEntity shiftEntity) {
+    public ResponseEntity<ShiftEntity> createShift(@RequestBody ShiftCreateDto shiftEntity) {
         return iShiftService.save(shiftEntity);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ShiftEntity> updateShift(@RequestBody ShiftEntity shiftEntity) {
+    public ResponseEntity<ShiftEntity> updateShift(@RequestBody ShiftUpdateDto shiftEntity) {
         return iShiftService.update(shiftEntity);
     }
 

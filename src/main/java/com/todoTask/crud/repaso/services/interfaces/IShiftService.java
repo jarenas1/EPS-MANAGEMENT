@@ -1,5 +1,7 @@
 package com.todoTask.crud.repaso.services.interfaces;
 
+import com.todoTask.crud.repaso.dto.request.shiftDTOs.ShiftCreateDto;
+import com.todoTask.crud.repaso.dto.request.shiftDTOs.ShiftUpdateDto;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.ShiftEntity;
 import com.todoTask.crud.repaso.tools.enums.Day;
@@ -16,8 +18,8 @@ public interface IShiftService {
     List<ShiftEntity> findByDoctorAndActive(DoctorEntity doctor, Boolean active);
     Page<ShiftEntity> findAll(Pageable pageable);
     ShiftEntity findById(Long id);
-    ResponseEntity<ShiftEntity> save(ShiftEntity shiftEntity);
-    ResponseEntity <ShiftEntity> update(ShiftEntity shiftEntity);
+    ResponseEntity<ShiftEntity> save(ShiftCreateDto shiftEntity);
+    ResponseEntity <ShiftEntity> update(ShiftUpdateDto shiftEntity);
     ShiftEntity delete(Long id);
 
 

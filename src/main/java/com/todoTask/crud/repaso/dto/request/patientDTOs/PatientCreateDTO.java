@@ -1,4 +1,4 @@
-package com.todoTask.crud.repaso.dto.request;
+package com.todoTask.crud.repaso.dto.request.patientDTOs;
 
 import lombok.Builder;
 import lombok.Data;

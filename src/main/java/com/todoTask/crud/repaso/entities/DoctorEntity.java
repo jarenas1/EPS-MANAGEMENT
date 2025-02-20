@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,7 @@ public class DoctorEntity {
     private List<DateEntity> dates;
 
     @OneToMany(mappedBy = "doctor")
+    @JsonIgnore
     private List<ShiftEntity> shifts;
 
 }

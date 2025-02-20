@@ -1,10 +1,8 @@
 package com.todoTask.crud.repaso.services.interfaces;
 
-import com.todoTask.crud.repaso.dto.request.DateCreationDTOIdStatus;
-import com.todoTask.crud.repaso.dto.request.DateWOStatus;
+import com.todoTask.crud.repaso.dto.request.dateDTOs.DateCreationDTOIdStatus;
+import com.todoTask.crud.repaso.dto.request.dateDTOs.DateWOStatus;
 import com.todoTask.crud.repaso.entities.DateEntity;
-import com.todoTask.crud.repaso.entities.DoctorEntity;
-import com.todoTask.crud.repaso.entities.PatientEntity;
 import com.todoTask.crud.repaso.tools.enums.DateStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

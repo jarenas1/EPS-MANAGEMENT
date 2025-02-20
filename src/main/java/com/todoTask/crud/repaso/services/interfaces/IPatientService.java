@@ -1,6 +1,6 @@
 package com.todoTask.crud.repaso.services.interfaces;
 
-import com.todoTask.crud.repaso.dto.request.PatientUpdateDTO;
+import com.todoTask.crud.repaso.dto.request.patientDTOs.PatientUpdateDTO;
 import com.todoTask.crud.repaso.entities.PatientEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
