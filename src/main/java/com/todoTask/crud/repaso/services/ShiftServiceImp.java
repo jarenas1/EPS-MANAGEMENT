@@ -4,6 +4,7 @@ import com.todoTask.crud.repaso.dto.request.shiftDTOs.ShiftCreateDto;
 import com.todoTask.crud.repaso.dto.request.shiftDTOs.ShiftUpdateDto;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.ShiftEntity;
+import com.todoTask.crud.repaso.error_handler.CantCreateShiftException;
 import com.todoTask.crud.repaso.error_handler.DoctorNotFoundException;
 import com.todoTask.crud.repaso.error_handler.ShiftNotFoundException;
 import com.todoTask.crud.repaso.repositories.DoctorRepository;
@@ -56,6 +57,12 @@ public class ShiftServiceImp implements IShiftService {
     @Override
     public ResponseEntity<ShiftEntity> save(ShiftCreateDto shiftEntity) {
         DoctorEntity doctorEntity = doctorRepository.findById(shiftEntity.getDoctorId()).orElseThrow(()-> new DoctorNotFoundException("we cant found the doctor"));
+        //Verify if doctor already have a turn in this day to throw an exception saing that the turn can´t be created.
+        List<ShiftEntity> shiftByDay = shiftRepository.findByDoctorAndDayAndActive(doctorEntity,shiftEntity.getDay(),true);
+
+        if (!shiftByDay.isEmpty()) {
+            throw new CantCreateShiftException("this day already has a shift associated with the doctor");
+        }
         ShiftEntity shiftToSave = ShiftEntity.builder()
                 .day(shiftEntity.getDay())
                 .startTime(shiftEntity.getStartTime())
