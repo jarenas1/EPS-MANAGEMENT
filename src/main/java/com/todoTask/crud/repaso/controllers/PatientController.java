@@ -28,10 +28,6 @@ public class PatientController {
         return ResponseEntity.ok(patientEntity);
     }
 
-//    @PostMapping("/create")
-//    public ResponseEntity<PatientEntity> create (@RequestBody PatientEntity patientEntity){
-//        return iPatientService.save(patientEntity);
-//    }
 
     @PutMapping("/update")
     public  ResponseEntity<PatientEntity> update(@RequestBody PatientUpdateDTO patientEntity){

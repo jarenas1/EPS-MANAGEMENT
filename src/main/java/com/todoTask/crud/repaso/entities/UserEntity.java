@@ -37,6 +37,7 @@ public class UserEntity {
     private Boolean active = true;
 
     @OneToOne(mappedBy = "user")
+    @JsonIgnore
     private PatientEntity patient;
 
     @OneToOne(mappedBy = "user")
