@@ -10,8 +10,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface IDoctorService {
-    ResponseEntity<?> findBySpeciality(Long idSpecialty);
-//    ResponseEntity<DoctorEntity> save(DoctorCreateDTO doctorEntity);
+    ResponseEntity<?> findBySpeciality(String specialty);
     ResponseEntity<DoctorEntity> update(DoctorUpdateDTO doctorEntity);
     Page<DoctorEntity> findAll(Pageable pageable);
     Boolean delete(Long id);

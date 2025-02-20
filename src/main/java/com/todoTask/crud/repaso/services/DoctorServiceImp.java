@@ -38,37 +38,13 @@ public class DoctorServiceImp implements IDoctorService {
 
     @Transactional(readOnly = true)
     @Override
-    public ResponseEntity<?> findBySpeciality(Long idSpecialty) {
+    public ResponseEntity<?> findBySpeciality(String specialty) {
         List<DoctorEntity> doctorEntities = doctorRepository.findBySpecialty(
-                specialityRepository.findById(idSpecialty).orElseThrow(
+                specialityRepository.findByName(specialty).orElseThrow(
                         ()-> new SpecialityNotFoundException("we cant found the speciality")));
         return ResponseEntity.ok(doctorEntities);
     }
 
-//    @Transactional
-//    @Override
-//    public ResponseEntity<DoctorEntity> save(DoctorCreateDTO doctorEntity) {
-//        //we've to create a user first to create the relation bw doctor and user
-//        Set<RoleEntity> roles = new HashSet<>();
-//        roles.add(RoleEntity);
-//        UserEntity userEntity = UserEntity.builder()
-//                .email(doctorEntity.getEmail())
-//                .password(doctorEntity.getPassword())
-//                .name(doctorEntity.getName())
-//                .lastname(doctorEntity.getLastname())
-//                .roles(roles)
-//                .build();
-//
-//        SpecialtyEntity specialty = specialityRepository.findByName(doctorEntity.getSpecialty()).orElseThrow(()
-//                -> new SpecialityNotFoundException("we cant found the speciality"));
-//
-//        DoctorEntity doctorSaved = doctorRepository.save(DoctorEntity.builder()
-//                        .user(userEntity)
-//                        .specialty(specialty)
-//                .build());
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).body(doctorSaved);
-//    }
 
     @Transactional
     @Override

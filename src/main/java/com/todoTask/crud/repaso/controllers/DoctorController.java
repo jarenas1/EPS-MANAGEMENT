@@ -19,9 +19,9 @@ public class DoctorController {
     @Autowired
     IDoctorService doctorService;
 
-    @GetMapping("/speciality/{specialityId}")
-    public ResponseEntity<?> findBySpeciality(@PathVariable Long specialityId){
-        return doctorService.findBySpeciality(specialityId);
+    @GetMapping("/speciality/{speciality}")
+    public ResponseEntity<?> findBySpeciality(@PathVariable String speciality){
+        return doctorService.findBySpeciality(speciality);
     }
 
     @PutMapping("/update")
