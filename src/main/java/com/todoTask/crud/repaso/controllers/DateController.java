@@ -2,6 +2,7 @@ package com.todoTask.crud.repaso.controllers;
 
 import com.todoTask.crud.repaso.dto.request.dateDTOs.DateCreationDTOIdStatus;
 import com.todoTask.crud.repaso.dto.request.dateDTOs.DateWOStatus;
+import com.todoTask.crud.repaso.dto.request.dateDTOs.RescheduleDateDTO;
 import com.todoTask.crud.repaso.entities.DateEntity;
 import com.todoTask.crud.repaso.services.interfaces.IDateService;
 import com.todoTask.crud.repaso.tools.enums.DateStatus;
@@ -42,9 +43,10 @@ public class DateController {
         return ResponseEntity.ok(dates);
     }
 
-    @PatchMapping("/reshudel/{id}/{shiftId}")
-    public ResponseEntity<DateEntity> rescheduleDate(@PathVariable Long id, @PathVariable Long shiftId,  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime newDate){
-        return dateServiceImp.rescheduleDate(id, newDate, shiftId);
+    @PutMapping("/reschedule/{id}")
+    public ResponseEntity<DateEntity> rescheduleDate(@PathVariable Long id,
+                                                     @RequestBody RescheduleDateDTO dto) {
+        return dateServiceImp.rescheduleDate(id, dto.getNewDate(), dto.getShiftId());
     }
 
     @PostMapping("/create")

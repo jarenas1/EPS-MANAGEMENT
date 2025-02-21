@@ -141,7 +141,10 @@ public class DateServiceImp implements IDateService {
                 proposedDateTime.plusMinutes(29).minusSeconds(59)
         );
 
-        if (!existentDates.isEmpty()) {
+        boolean conflict = existentDates.stream()
+                .anyMatch(d -> !d.getId().equals(dateEntity.getId()));
+
+        if (conflict) {
             throw new ConflictDatesException("the date time is already in use");
         }
     }
