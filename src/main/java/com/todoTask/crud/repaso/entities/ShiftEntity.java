@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -31,6 +32,9 @@ public class ShiftEntity {
     private LocalDateTime endTime;
 
     private Boolean active = true;
+
+    @OneToMany(mappedBy = "shift", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DateEntity> dates;
 
     @PrePersist
     public void prePersist() {

@@ -43,13 +43,13 @@ public class DateServiceImp implements IDateService {
     ShiftRepository shiftRepository;
 
     @Override
-    public List<DateEntity> findByDoctorAndDateTimeBetween(Long doctorId, LocalDateTime start, LocalDateTime end) {
-        Optional<DoctorEntity> optionalDoctorEntity = doctorRepository.findById(doctorId);
-        if (optionalDoctorEntity.isPresent()){
-            List<DateEntity> dates = dateRepository.findByDoctorAndDateTimeBetween(optionalDoctorEntity.get(), start,end);
+    public List<DateEntity> findByDoctorAndDateTimeBetween(Long shiftId, LocalDateTime start, LocalDateTime end) {
+        Optional<ShiftEntity> opShiftEntity = shiftRepository.findById(shiftId);
+        if (opShiftEntity.isPresent()){
+            List<DateEntity> dates = dateRepository.findByShiftAndDateTimeBetween(opShiftEntity.get(), start,end);
             return dates;
         }else{
-            throw new DoctorNotFoundException( String.format("We cant found the doctor with the id %a", doctorId));
+            throw new DoctorNotFoundException( String.format("We cant found the doctor with the id %a", shiftId));
         }
     }
 
@@ -77,9 +77,10 @@ public class DateServiceImp implements IDateService {
 
     @Transactional
     @Override
-    public ResponseEntity<DateEntity> rescheduleDate(Long id, LocalDateTime newDate){
+    public ResponseEntity<DateEntity> rescheduleDate(Long id, LocalDateTime newDate, Long shiftId){
         DateEntity dateEntity = dateRepository.findById(id).orElseThrow(()->new DateNotFoundException("We cant found the date with the id " + id));
         dateEntity.setDateTime(newDate);
+        dateEntity.setShift(shiftRepository.findById(shiftId).orElseThrow(() -> new ShiftNotFoundException("We cant found the shift with the id " + shiftId)));
         checkIfDoctorIsAvalible(dateEntity);
         validateConflictsDates(dateEntity);
         dateEntity.setStatus(DateStatus.SCHEDULED);
@@ -97,6 +98,9 @@ public class DateServiceImp implements IDateService {
                         .orElseThrow(()->
                                 new PatientNotFoundException("patient dont exist")))
                 .reason(dateWOStatust.getReason())
+                .shift(shiftRepository.findById(dateWOStatust.getShift())
+                        .orElseThrow(()
+                                -> new ShiftNotFoundException("shift dont exist")))
                 .doctor(doctorRepository.findById(dateWOStatust.getDoctor())
                         .orElseThrow(()
                                 -> new DoctorNotFoundException("doctor not found")))
@@ -131,11 +135,10 @@ public class DateServiceImp implements IDateService {
     private void validateConflictsDates(DateEntity dateEntity) {
         LocalDateTime proposedDateTime = dateEntity.getDateTime();
 
-        // Buscar citas en una ventana de 30 minutos antes y después
-        List<DateEntity> existentDates = dateRepository.findByDoctorAndDateTimeBetween(
-                dateEntity.getDoctor(),
-                proposedDateTime.minusMinutes(29).plusSeconds(59),  // 30 minutos antes
-                proposedDateTime.plusMinutes(29).minusSeconds(59)    // 30 minutos después
+        List<DateEntity> existentDates = dateRepository.findByShiftAndDateTimeBetween(
+                dateEntity.getShift(),
+                proposedDateTime.minusMinutes(29).plusSeconds(59),
+                proposedDateTime.plusMinutes(29).minusSeconds(59)
         );
 
         if (!existentDates.isEmpty()) {

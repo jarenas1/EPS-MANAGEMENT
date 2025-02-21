@@ -1,7 +1,5 @@
 package com.todoTask.crud.repaso.dto.request.dateDTOs;
 
-import com.todoTask.crud.repaso.entities.DoctorEntity;
-import com.todoTask.crud.repaso.entities.PatientEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +19,6 @@ public class DateCreationDTOIdStatus {
     private Long patient;
 
     private Long doctor;
+
+    private Long shift;
 }

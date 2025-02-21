@@ -30,13 +30,6 @@ public class PatientServiceImp implements IPatientService {
         return patientRepository.findByDocument(document);
     }
 
-//    @Transactional
-//    @Override
-//    public ResponseEntity<PatientEntity> save(PatientEntity patientEntity) {
-//        PatientEntity patientSaved = patientRepository.save(patientEntity);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(patientSaved);
-//    }
-
     @Transactional
     @Override
     public ResponseEntity<PatientEntity> update(PatientUpdateDTO patientEntity) {

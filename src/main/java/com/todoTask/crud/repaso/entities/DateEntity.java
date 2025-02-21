@@ -46,6 +46,11 @@ public class DateEntity {
 
     @ManyToOne
     @JsonIgnore
+    @JoinColumn(name = "shift_id", nullable = false)
+    private ShiftEntity shift;
+
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "doctor_id", nullable = false)
     private DoctorEntity doctor;
 }

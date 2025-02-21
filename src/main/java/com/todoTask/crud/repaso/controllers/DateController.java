@@ -42,9 +42,9 @@ public class DateController {
         return ResponseEntity.ok(dates);
     }
 
-    @PatchMapping("/reshudel/{id}")
-    public ResponseEntity<DateEntity> rescheduleDate(@PathVariable Long id,  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime newDate){
-        return dateServiceImp.rescheduleDate(id, newDate);
+    @PatchMapping("/reshudel/{id}/{shiftId}")
+    public ResponseEntity<DateEntity> rescheduleDate(@PathVariable Long id, @PathVariable Long shiftId,  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime newDate){
+        return dateServiceImp.rescheduleDate(id, newDate, shiftId);
     }
 
     @PostMapping("/create")

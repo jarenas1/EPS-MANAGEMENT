@@ -22,6 +22,6 @@ public interface IDateService {
     ResponseEntity<DateEntity> updateNotes(String notes, Long dateId);
     Page<DateEntity> findAll(Pageable pageable);
     Boolean delete(Long id);
-    ResponseEntity<DateEntity> rescheduleDate(Long id, LocalDateTime newDate);
+    ResponseEntity<DateEntity> rescheduleDate(Long id, LocalDateTime newDate, Long shiftId);
 
 }
