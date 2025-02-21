@@ -1,5 +1,6 @@
 package com.todoTask.crud.repaso.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.todoTask.crud.repaso.tools.enums.DateStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,14 @@ public class DateEntity {
 
     private LocalDateTime dateTime;
 
-    private Integer duration = 30;
+    private Integer duration;
+
+    @PrePersist
+    public void prePersist() {
+        if (duration == null) {
+            duration = 30;
+        }
+    }
 
     private String reason;
 
@@ -33,9 +41,11 @@ public class DateEntity {
 
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
+    @JsonIgnore
     private PatientEntity patient;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "doctor_id", nullable = false)
     private DoctorEntity doctor;
 }

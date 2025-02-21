@@ -27,7 +27,7 @@ public class ShiftShedulerConfig {
         return scheduler;
     }
 
-    @Scheduled(cron = "0 0 22 * * SUN") //Execute the task in SUNDAY / at 0 seg / 0 min 22 hours / * every day of month / * every month pf year
+    @Scheduled(cron = "0 0 22 * * SUN") //Execute the task on SUNDAY / at 0 seg / 0 min 22 hours / * every day of month / * every month of year
 
     public void limpiarTurnos() {
         try {

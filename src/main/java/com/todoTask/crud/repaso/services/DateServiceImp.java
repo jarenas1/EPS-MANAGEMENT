@@ -93,9 +93,13 @@ public class DateServiceImp implements IDateService {
         DateEntity dateEntity = DateEntity.builder()
                 .dateTime(dateWOStatust.getDateTime())
                 .notes(dateWOStatust.getNotes())
-                .patient(dateWOStatust.getPatient())
+                .patient(patientRepository.findById(dateWOStatust.getPatient())
+                        .orElseThrow(()->
+                                new PatientNotFoundException("patient dont exist")))
                 .reason(dateWOStatust.getReason())
-                .doctor(dateWOStatust.getDoctor())
+                .doctor(doctorRepository.findById(dateWOStatust.getDoctor())
+                        .orElseThrow(()
+                                -> new DoctorNotFoundException("doctor not found")))
                 .status(DateStatus.SCHEDULED)
                 .build();
         checkIfDoctorIsAvalible(dateEntity);
@@ -125,14 +129,15 @@ public class DateServiceImp implements IDateService {
     }
 
     private void validateConflictsDates(DateEntity dateEntity) {
-        LocalDateTime startInterval = dateEntity.getDateTime();
-        LocalDateTime endInterval = startInterval.plusMinutes(dateEntity.getDuration());
+        LocalDateTime proposedDateTime = dateEntity.getDateTime();
 
+        // Buscar citas en una ventana de 30 minutos antes y después
         List<DateEntity> existentDates = dateRepository.findByDoctorAndDateTimeBetween(
                 dateEntity.getDoctor(),
-                startInterval,
-                endInterval
+                proposedDateTime.minusMinutes(29).plusSeconds(59),  // 30 minutos antes
+                proposedDateTime.plusMinutes(29).minusSeconds(59)    // 30 minutos después
         );
+
         if (!existentDates.isEmpty()) {
             throw new ConflictDatesException("the date time is already in use");
         }
@@ -153,9 +158,14 @@ public class DateServiceImp implements IDateService {
                 .id(dateWOStatus.getId())
                 .dateTime(dateWOStatus.getDateTime())
                 .notes(dateWOStatus.getNotes())
-                .patient(dateWOStatus.getPatient())
+                .patient(patientRepository.findById(dateWOStatus.getPatient())
+                        .orElseThrow(()->
+                                new PatientNotFoundException("patient dont exist")))
+                .duration(30)
                 .reason(dateWOStatus.getReason())
-                .doctor(dateWOStatus.getDoctor())
+                .doctor(doctorRepository.findById(dateWOStatus.getDoctor())
+                        .orElseThrow(()
+                                -> new DoctorNotFoundException("doctor not found")))
                 .build();
         DateEntity dateUpdated = dateRepository.save(dateEntity);
         return ResponseEntity.ok(dateUpdated);

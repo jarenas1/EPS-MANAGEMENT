@@ -18,7 +18,7 @@ public class DateCreationDTOIdStatus {
 
     private String notes;
 
-    private PatientEntity patient;
+    private Long patient;
 
-    private DoctorEntity doctor;
+    private Long doctor;
 }
