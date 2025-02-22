@@ -36,7 +36,32 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http -> {
-                    http.requestMatchers(HttpMethod.POST, "/auth/**").permitAll();
+                    http.requestMatchers(HttpMethod.POST, "/auth/log-in").permitAll()
+                            .requestMatchers(HttpMethod.POST, "/auth/sign-up/**").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.POST,  "/specialities/**").hasRole("ADMIN")
+                                    .requestMatchers(HttpMethod.DELETE,  "/specialities/**").hasRole("ADMIN")
+                                    .requestMatchers(HttpMethod.PUT,  "/specialities/**").hasRole("ADMIN")
+                                    .requestMatchers(HttpMethod.GET,  "/specialities/**").authenticated()
+                            //-----------------------------------------SHIFTS ENDPOINTS-------------------------
+                                    .requestMatchers(HttpMethod.GET, "/shifts/**").authenticated()
+                            .requestMatchers(HttpMethod.POST, "/shifts/**").hasRole("ADMIN")
+                                    .requestMatchers(HttpMethod.PUT,  "/shifts/**").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.DELETE,  "/shifts/**").hasRole("ADMIN")
+                            //------------------------------patient------------------------------
+                                    .requestMatchers(HttpMethod.PUT,  "/patients/**").hasAnyRole("ADMIN", "PATIENT")
+                                    .requestMatchers(HttpMethod.GET, "/patients/{id}").hasAnyRole("ADMIN", "PATIENT", "DOCTOR")
+                                    .requestMatchers(HttpMethod.DELETE, "/patients/{id}").hasAnyRole("ADMIN")
+                                    .requestMatchers(HttpMethod.GET,  "/patients").hasAnyRole("ADMIN")
+                            //--------------------------DOCTOR----------------------------------------
+                                    .requestMatchers(HttpMethod.PUT,  "/doctors/{id}").hasAnyRole("ADMIN", "DOCTOR")
+                                    .requestMatchers(HttpMethod.DELETE,  "/doctors/{id}").hasAnyRole("ADMIN")
+                                    .requestMatchers(HttpMethod.GET,  "/doctors/**").hasAnyRole("ADMIN", "DOCTOR, PATIENT")
+                            .requestMatchers(HttpMethod.GET,  "/patients").hasAnyRole("ADMIN", "DOCTOR, PATIENT")
+                                    //-------------------------DATE--------------------------------------------------------
+                                            .requestMatchers(HttpMethod.PUT,  "/dates/**").authenticated()
+                                    .requestMatchers(HttpMethod.DELETE,  "/dates/**").hasRole("ADMIN")
+                                    .requestMatchers(HttpMethod.GET,  "/dates/**").authenticated()
+                                    .requestMatchers(HttpMethod.PATCH,  "/dates/**").hasRole("DOCTOR");
                     http.anyRequest().permitAll();
                 })
                 //CURTOM FILTER IMPL
