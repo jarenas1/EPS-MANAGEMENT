@@ -2,8 +2,8 @@ package com.todoTask.crud.repaso.services;
 
 import com.todoTask.crud.repaso.dto.request.doctorDTOs.DoctorUpdateDTO;
 import com.todoTask.crud.repaso.entities.*;
-import com.todoTask.crud.repaso.error_handler.DoctorNotFoundException;
-import com.todoTask.crud.repaso.error_handler.SpecialityNotFoundException;
+import com.todoTask.crud.repaso.exceptions.DoctorNotFoundException;
+import com.todoTask.crud.repaso.exceptions.SpecialityNotFoundException;
 import com.todoTask.crud.repaso.repositories.DoctorRepository;
 import com.todoTask.crud.repaso.repositories.SpecialityRepository;
 import com.todoTask.crud.repaso.repositories.UserRepository;

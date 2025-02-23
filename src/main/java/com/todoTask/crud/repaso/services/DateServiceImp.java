@@ -6,7 +6,7 @@ import com.todoTask.crud.repaso.entities.DateEntity;
 import com.todoTask.crud.repaso.entities.DoctorEntity;
 import com.todoTask.crud.repaso.entities.PatientEntity;
 import com.todoTask.crud.repaso.entities.ShiftEntity;
-import com.todoTask.crud.repaso.error_handler.*;
+import com.todoTask.crud.repaso.exceptions.*;
 import com.todoTask.crud.repaso.repositories.DateRepository;
 import com.todoTask.crud.repaso.repositories.DoctorRepository;
 import com.todoTask.crud.repaso.repositories.PatientRepository;

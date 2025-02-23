@@ -1,4 +1,4 @@
-package com.todoTask.crud.repaso.error_handler;
+package com.todoTask.crud.repaso.exceptions;
 
 public class ConflictDatesException extends RuntimeException{
     public ConflictDatesException(String message) {

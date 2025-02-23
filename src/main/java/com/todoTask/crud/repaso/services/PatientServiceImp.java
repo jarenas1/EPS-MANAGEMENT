@@ -3,7 +3,7 @@ package com.todoTask.crud.repaso.services;
 import com.todoTask.crud.repaso.dto.request.patientDTOs.PatientUpdateDTO;
 import com.todoTask.crud.repaso.entities.PatientEntity;
 import com.todoTask.crud.repaso.entities.UserEntity;
-import com.todoTask.crud.repaso.error_handler.PatientNotFoundException;
+import com.todoTask.crud.repaso.exceptions.PatientNotFoundException;
 import com.todoTask.crud.repaso.repositories.PatientRepository;
 import com.todoTask.crud.repaso.repositories.UserRepository;
 import com.todoTask.crud.repaso.services.interfaces.IPatientService;

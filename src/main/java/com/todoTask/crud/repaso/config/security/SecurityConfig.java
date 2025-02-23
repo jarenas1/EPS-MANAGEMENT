@@ -64,7 +64,6 @@ public class SecurityConfig {
                                     .requestMatchers(HttpMethod.PATCH,  "/dates/**").hasRole("DOCTOR");
                     http.anyRequest().permitAll();
                 })
-                //CURTOM FILTER IMPL
                 .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
                 .build();
     }

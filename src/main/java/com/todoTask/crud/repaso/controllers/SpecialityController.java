@@ -1,7 +1,7 @@
 package com.todoTask.crud.repaso.controllers;
 
 import com.todoTask.crud.repaso.entities.SpecialtyEntity;
-import com.todoTask.crud.repaso.error_handler.SpecialityNotFoundException;
+import com.todoTask.crud.repaso.exceptions.SpecialityNotFoundException;
 import com.todoTask.crud.repaso.services.interfaces.ISpecialityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
