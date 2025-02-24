@@ -44,7 +44,9 @@ docker-compose up -d
 
 ## 📚 Documentación API
 -- Endpoints principales:
-``` 
+```
+
+//-------------------------AUTH ENDPOINTS-------------------------
 .requestMatchers(HttpMethod.POST, "/auth/log-in").permitAll()
 .requestMatchers(HttpMethod.POST, "/auth/sign-up/**").hasRole("ADMIN")
 .requestMatchers(HttpMethod.POST,  "/specialities/**").hasRole("ADMIN")
@@ -52,25 +54,25 @@ docker-compose up -d
 .requestMatchers(HttpMethod.PUT,  "/specialities/**").hasRole("ADMIN")
 .requestMatchers(HttpMethod.GET,  "/specialities/**").authenticated()
 
-//-----------------------------------------SHIFTS ENDPOINTS-------------------------
+//-------------------------SHIFTS ENDPOINTS-------------------------
 .requestMatchers(HttpMethod.GET, "/shifts/**").authenticated()
 .requestMatchers(HttpMethod.POST, "/shifts/**").hasRole("ADMIN")
 .requestMatchers(HttpMethod.PUT,  "/shifts/**").hasRole("ADMIN")
 .requestMatchers(HttpMethod.DELETE,  "/shifts/**").hasRole("ADMIN")
 
-//------------------------------patient----------------------------
+//-------------------------PATIENT ENDPOINTS-------------------------
 .requestMatchers(HttpMethod.PUT,  "/patients/**").hasAnyRole("ADMIN", "PATIENT")
 .requestMatchers(HttpMethod.GET, "/patients/{id}").hasAnyRole("ADMIN", "PATIENT", "DOCTOR")
 .requestMatchers(HttpMethod.DELETE, "/patients/{id}").hasAnyRole("ADMIN")
 .requestMatchers(HttpMethod.GET,  "/patients").hasAnyRole("ADMIN")
 
-//--------------------------DOCTOR----------------------------------------
+//-------------------------DOCTOR ENDPOINTS-------------------------
 .requestMatchers(HttpMethod.PUT,  "/doctors/{id}").hasAnyRole("ADMIN", "DOCTOR")
 .requestMatchers(HttpMethod.DELETE,  "/doctors/{id}").hasAnyRole("ADMIN")
 .requestMatchers(HttpMethod.GET,  "/doctors/**").hasAnyRole("ADMIN", "DOCTOR, PATIENT")
 .requestMatchers(HttpMethod.GET,  "/patients").hasAnyRole("ADMIN", "DOCTOR, PATIENT")
 
-//-------------------------DATE--------------------------------------------------------
+//-------------------------DATE/APPOINTMENT ENDPOINTS-------------------------
 .requestMatchers(HttpMethod.PUT,  "/dates/**").authenticated()
 .requestMatchers(HttpMethod.DELETE,  "/dates/**").hasRole("ADMIN")
 .requestMatchers(HttpMethod.GET,  "/dates/**").authenticated()
